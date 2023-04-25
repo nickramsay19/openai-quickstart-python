@@ -1,21 +1,59 @@
 <!DOCTYPE html>
-<head>
-  <title>OpenAI Quickstart</title>
-  <link
-    rel="shortcut icon"
-    href="{{ url_for('static', filename='dog.png') }}"
-  />
-  <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}" />
-</head>
+<html>
+	<head>
+		<title>nick ai page</title>
+		<link rel="stylesheet" href="{{ url_for('static', filename='normalize.css') }}" />
+		<link rel="stylesheet" href="{{ url_for('static', filename='skeleton.css') }}" />
+		<link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}" />
+	</head>
+	<body>
+		<main class="container">
+			<header class="row header">
+				<div class="three columns"><h1>ai page</h1></div>
+				<div class="nine columns">
+					<ul class="nav">
+						<li><a href="{{ url_for('index') }}">chat</a></li>
+						<li><a href="{{ url_for('image') }}">image</a></li>
+					</ul>
+				</div>
+			</header>
 
-<body>
-  <img src="{{ url_for('static', filename='dog.png') }}" class="icon" />
-  <h3>Name my pet</h3>
-  <form action="/" method="post">
-    <input type="text" name="animal" placeholder="Enter an animal" required />
-    <input type="submit" value="Generate names" />
-  </form>
-  {% if result %}
-  <div class="result">{{ result }}</div>
-  {% endif %}
-</body>
+			<h5>Chat Completion</h5>
+
+			<div id="chat">
+				{% for message in session['messages'] %}
+					<div class="u-full-width chat-message chat-message-{{ message.role }}">
+						<strong class="chat-message-role">{{ message.role }}:</strong>
+						<span class="chat-message-content">{{ message.content }}</span>
+					</div>
+				{% endfor %}
+			</div>
+			
+			<div id="chat-input">
+				<div class="container">
+				<form action="/" method="post">
+					<div class="row">
+						<div class="ten columns">
+							<textarea class="u-full-width" placeholder="Hi Dave ..." id="prompt-textarea" name="prompt" required></textarea>
+						</div>
+						<div class="two columns">
+							<label for="model-select">select GPT model</label>
+							<select id="model-select" name="model" value="{{session['model']}}">
+								<option value="gpt-4" disabled>gpt-4</option>
+								<option value="gpt-4-0314" disabled>gpt-4-0314</option>
+								<option value="gpt-4-32k" disabled>gpt-4-32k</option>
+								<option value="gpt-4-32k-0314" disabled>gpt-4-32k-0314</option>
+								<option value="gpt-3.5-turbo" selected>gpt-3.5-turbo</option>
+								<option value="gpt-3.5-turbo-0301">gpt-3.5-turbo-0301</option>
+							</select>
+							<label for="model-select">temperature</label>
+							<input type="range" id="temperature-range-input" name="temperature" min="0" max="2" step="0.01" value="{{ session['temperature'] }}">
+							<input class="button-primary" type="submit" value="send">
+						</div>
+					</div>
+				</form>
+				</div>
+			</div>
+		</main>
+	</body>
+</html>

@@ -1,66 +1,79 @@
-@font-face {
-  font-family: "ColfaxAI";
-  src: url(https://cdn.openai.com/API/fonts/ColfaxAIRegular.woff2)
-      format("woff2"),
-    url(https://cdn.openai.com/API/fonts/ColfaxAIRegular.woff) format("woff");
-  font-weight: normal;
-  font-style: normal;
+/* general */
+html, body {
+    height: 100%;
 }
-@font-face {
-  font-family: "ColfaxAI";
-  src: url(https://cdn.openai.com/API/fonts/ColfaxAIBold.woff2) format("woff2"),
-    url(https://cdn.openai.com/API/fonts/ColfaxAIBold.woff) format("woff");
-  font-weight: bold;
-  font-style: normal;
+
+textarea {
+    resize: none;
 }
-body,
-input {
-  font-size: 16px;
-  line-height: 24px;
-  color: #353740;
-  font-family: "ColfaxAI", Helvetica, sans-serif;
+
+.container {
+    margin-bottom: 3em;
 }
-body {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding-top: 60px;
+
+/* header and nav */
+
+.header {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin-bottom: 1em;
+
+    border-bottom: black;
+    border-bottom-style: solid;
+    border-bottom-width: 1px;
 }
-.icon {
-  width: 34px;
+
+.nav {
+    list-style-type: none;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
 }
-h3 {
-  font-size: 32px;
-  line-height: 40px;
-  font-weight: bold;
-  color: #202123;
-  margin: 16px 0 40px;
+
+.nav li {
+    margin-left: 2em;
 }
-form {
-  display: flex;
-  flex-direction: column;
-  width: 320px;
+
+.nav li a {
+    font-size: larger;
 }
-input[type="text"] {
-  padding: 12px 16px;
-  border: 1px solid #10a37f;
-  border-radius: 4px;
-  margin-bottom: 24px;
+
+/* chat messages */
+#chat {
+    height: 100%;
+    overflow-y: scroll;
+
+    border-bottom: black;
+    border-bottom-style: solid;
+    border-bottom-width: 1px;
 }
-::placeholder {
-  color: #8e8ea0;
-  opacity: 1;
+
+.chat-message {
+    border-width: 0.1;
 }
-input[type="submit"] {
-  padding: 12px 0;
-  color: #fff;
-  background-color: #10a37f;
-  border: none;
-  border-radius: 4px;
-  text-align: center;
-  cursor: pointer;
+
+.chat-message-assistant {
+    color: #111;
+    background-color: #fefffe;
+
+    border-top-width: 1px;
+    border-color: #444;
+    border-top-style: solid;
 }
-.result {
-  font-weight: bold;
-  margin-top: 40px;
+
+.chat-message-user {
+    color: #444;
 }
+
+/* chat input */
+#chat-input {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    height: 10em;
+    width: 100%;
+}
+
